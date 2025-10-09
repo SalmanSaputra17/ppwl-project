@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+    # 1. Aplikasi Laravel (PHP-FPM)
+    app:
+        build:
+            context: ..
+            dockerfile: docker/Dockerfile # Mengacu pada Dockerfile di direktori ini
+        container_name: ppwl_app
+        restart: unless-stopped
+        volumes:
+            # Mount kode proyek lokal ke dalam container
+            - ..:/var/www/html
+            # Mount volume untuk menyimpan data composer/npm (opsional, untuk cache)
+            - composer_cache:/root/.composer
+            - node_modules:/var/www/html/node_modules # Agar node_modules tetap ada antar build
+        environment:
+            # Variabel environment yang dibutuhkan oleh Laravel
+            # Sesuaikan ini di file .env Anda juga
+            - DB_CONNECTION=mysql
+            - DB_HOST=ppwl_db
+            - DB_PORT=3306
+            - DB_DATABASE=${DB_DATABASE:-ppwl_project_1}
+            - DB_USERNAME=${DB_USERNAME:-ppwl_user}
+            - DB_PASSWORD=${DB_PASSWORD:-password}
+            - APP_ENV=${APP_ENV:-local}
+            - APP_DEBUG=${APP_DEBUG:-true}
+        # Tambahkan jaringan agar bisa berkomunikasi dengan Nginx dan MariaDB
+        networks:
+            - ppwl_network
+
+    # 2. Web Server (Nginx)
+    nginx:
+        image: nginx:stable-alpine
+        container_name: ppwl_nginx
+        restart: unless-stopped
+        ports:
+            # Akses aplikasi di http://localhost:8080
+            - "8080:80"
+        volumes:
+            # Mount kode proyek
+            - ..:/var/www/html
+            # Mount konfigurasi Nginx kustom
+            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - app
+        networks:
+            - ppwl_network
+
+    # 3. Database (MariaDB)
+    db:
+        image: mariadb:10.11
+        container_name: ppwl_db
+        restart: unless-stopped
+        environment:
+            # Variabel environment untuk konfigurasi MariaDB
+            MARIADB_DATABASE: ${DB_DATABASE:-ppwl_project_1}
+            MARIADB_USER: ${DB_USERNAME:-ppwl_user}
+            MARIADB_PASSWORD: ${DB_PASSWORD:-password}
+            MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-password}
+        volumes:
+            # Volume untuk menyimpan data database secara persisten
+            - db_data:/var/lib/mysql
+        networks:
+            - ppwl_network
+        ports:
+            - "3306:3306"
+
+# Jaringan yang akan digunakan oleh semua service
+networks:
+    ppwl_network:
+        driver: bridge
+
+# Volume untuk persistensi data
+volumes:
+    db_data:
+        driver: local
+    composer_cache:
+        driver: local
+    node_modules:
+        driver: local
