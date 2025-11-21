@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('role')->default('user');
-            $table->string('address')->nullable();
-            $table->string('phone_number')->nullable();
+            $table->string('role')->default('user')->after('remember_token');
+            $table->string('address')->nullable()->after('role');
+            $table->string('phone_number')->nullable()->after('address');
             $table->softDeletes();
         });
     }
