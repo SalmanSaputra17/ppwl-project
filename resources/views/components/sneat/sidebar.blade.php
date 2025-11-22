@@ -86,42 +86,52 @@
     </div>
     <div class="menu-inner-shadow"></div>
     <ul class="menu-inner py-1">
-        <!-- Dashboard -->
-        <li class="menu-item @if (request()->routeIs('dashboard')) active @endif">
-            <a href="{{ route('dashboard') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
-            </a>
-        </li>
-        <!-- Master -->
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Master</span>
-        </li>
-        <li class="menu-item @if (request()->routeIs('category.*')) active @endif">
-            <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-category"></i>
-                <div data-i18n="Authentications">Category</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('category.index') }}" class="menu-link">
-                        <div data-i18n="Basic">Category List</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="menu-item @if (request()->routeIs('product.*')) active @endif">
-            <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bxl-product-hunt"></i>
-                <div data-i18n="Authentications">Product</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('product.index') }}" class="menu-link">
-                        <div data-i18n="Basic">Product List</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @if (\Illuminate\Support\Facades\Auth::user()->role === 'admin')
+            <!-- Dashboard -->
+            <li class="menu-item @if (request()->routeIs('dashboard')) active @endif">
+                <a href="{{ route('dashboard') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">Dashboard</div>
+                </a>
+            </li>
+            <!-- Master -->
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Master</span>
+            </li>
+            <li class="menu-item @if (request()->routeIs('category.*')) active @endif">
+                <a href="#" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-category"></i>
+                    <div data-i18n="Authentications">Category</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{ route('category.index') }}" class="menu-link">
+                            <div data-i18n="Basic">Category List</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-item @if (request()->routeIs('product.*')) active @endif">
+                <a href="#" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bxl-product-hunt"></i>
+                    <div data-i18n="Authentications">Product</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{ route('product.index') }}" class="menu-link">
+                            <div data-i18n="Basic">Product List</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @else
+            <!-- Homepage -->
+            <li class="menu-item @if (request()->routeIs('home')) active @endif">
+                <a href="{{ route('home') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">Homepage</div>
+                </a>
+            </li>
+        @endif
     </ul>
 </aside>
