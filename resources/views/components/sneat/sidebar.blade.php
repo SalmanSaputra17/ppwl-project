@@ -99,41 +99,27 @@
         </li>
         <li class="menu-item">
             <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                <div data-i18n="Authentications">Katalog Produk</div>
+                <i class="menu-icon tf-icons bx bx-category"></i>
+                <div data-i18n="Authentications">Category</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{ route('category.index') }}" class="menu-link">
+                        <div data-i18n="Basic">Category List</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxl-product-hunt"></i>
+                <div data-i18n="Authentications">Product</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
                     <a href="#" class="menu-link">
-                        <div data-i18n="Basic">Tambah Data</div>
+                        <div data-i18n="Basic">Product List</div>
                     </a>
-                </li>
-                <li class="menu-header small text-uppercase"><span class="menu-header-text">Transaksi</span></li>
-                <!-- Cards -->
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-collection"></i>
-                        <div data-i18n="Basic">Daftar Pesanan</div>
-                    </a>
-                </li>
-                <!-- User interface -->
-                <li class="menu-item">
-                    <a href="javascript:void(0)" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-box"></i>
-                        <div data-i18n="User interface">Pembayaran</div>
-                    </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="#" class="menu-link">
-                                <div data-i18n="Accordion">Daftar Pembayaran</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="#" class="menu-link">
-                                <div data-i18n="Alerts">Verifikasi Pembayaran</div>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </li>
