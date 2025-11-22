@@ -86,7 +86,7 @@
     </div>
     <div class="menu-inner-shadow"></div>
     <ul class="menu-inner py-1">
-        @if (\Illuminate\Support\Facades\Auth::user()->role === 'admin')
+        @if (\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role === 'admin')
             <!-- Dashboard -->
             <li class="menu-item @if (request()->routeIs('dashboard')) active @endif">
                 <a href="{{ route('dashboard') }}" class="menu-link">
