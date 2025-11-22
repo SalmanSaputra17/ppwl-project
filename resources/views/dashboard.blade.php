@@ -8,9 +8,9 @@
                     <div class="d-flex align-items-end row">
                         <div class="col-sm-7">
                             <div class="card-body">
-                                <h5 class="card-title text-primary">Selamat datang di halaman Dashboard UTS PPWL!</h5>
-                                <p class="mb-4">
-                                    Selamat bekerja <span class="fw-bold"></span> nikmati harimu dengan lebih baik
+                                <h5 class="card-title text-primary">Admin Dashboard</h5>
+                                <p class="mb-4 text-lg">
+                                    Selamat datang di halaman Dashboard UTS PPWL!
                                 </p>
                             </div>
                         </div>
