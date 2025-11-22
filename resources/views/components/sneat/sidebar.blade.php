@@ -87,8 +87,8 @@
     <div class="menu-inner-shadow"></div>
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item active">
-            <a href="/" class="menu-link">
+        <li class="menu-item @if (request()->routeIs('dashboard')) active @endif">
+            <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
@@ -97,7 +97,7 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Master</span>
         </li>
-        <li class="menu-item">
+        <li class="menu-item @if (request()->routeIs('category.*')) active @endif">
             <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div data-i18n="Authentications">Category</div>
@@ -110,7 +110,7 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-item">
+        <li class="menu-item @if (request()->routeIs('product.*')) active @endif">
             <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bxl-product-hunt"></i>
                 <div data-i18n="Authentications">Product</div>
