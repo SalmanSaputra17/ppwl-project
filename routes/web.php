@@ -21,5 +21,5 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::resource('category', CategoryController::class)->except('show');
-Route::resource('product', ProductController::class)->except('show');
+Route::resource('category', CategoryController::class)->except('show')->middleware('admin');
+Route::resource('product', ProductController::class)->except('show')->middleware('admin');
